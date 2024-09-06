@@ -1,0 +1,143 @@
+body {
+    /* background: linear-gradient(135deg, #fafdff, #f7f3fc, #faf9ee); */
+    font-family: 'Open Sans', sans-serif !important;
+    line-height: 1.6;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+}
+
+.container {
+    flex: 1;
+}
+
+/* Navbar  */
+.navbar {
+    height: 6rem;
+    background-color: white;
+    border-bottom-left-radius: 1rem;
+    border-bottom-right-radius: 1rem;
+    box-shadow: 1px 1px 5px rgb(226, 225, 225);
+}
+
+.fa-compass {
+    color: #7330fa;
+    font-size: 2rem;
+}
+
+.nav-link {
+    color: #222222 !important;
+}
+
+
+.hovershadow:hover {
+    box-shadow: 1px 1px 5px #cdcdcd;
+}
+
+/* Footer  */
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-socials i {
+    font-size: 1.2rem;
+    margin-right: 1rem;
+}
+
+.f-info {
+    text-align: center;
+    height: 8rem;
+    background-color: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+/* Cards  */
+
+.listing-card {
+    border: none !important;
+    margin-bottom: 2rem;
+}
+
+.card-img-top {
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding: 0 !important;
+}
+
+.card-text p {
+    font-weight: 400 !important;
+}
+
+.listing-link {
+    text-decoration: none;
+
+}
+
+/* Card Effect  */
+
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.1;
+    background-color: #ffffff;
+}
+
+/* New page  */
+.add-btn {
+    background-color: #7330fa !important;
+    border: none !important;
+}
+
+/* Edit page */
+.edit-btn {
+    background-color: #7330fa !important;
+    border: none !important;
+}
+
+/* Show Page  */
+
+.show-img {
+    height: 30vh;
+}
+
+.btns {
+    display: flex;
+}
+
+.show-card {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+
+.custom-bg {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.271);
+    color: #000;
+}

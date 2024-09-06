@@ -1,0 +1,228 @@
+<% layout("/layouts/boilerplate") %>
+    <style>
+        #filters-container {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+        }
+
+        #filters {
+            display: flex;
+            overflow-x: hidden;
+            white-space: nowrap;
+            width: 80%;
+            margin: 0 10px;
+        }
+
+        .filter {
+            flex: 0 0 auto;
+            width: 100px;
+            text-align: center;
+            margin: 10px;
+            cursor: pointer;
+            opacity: 0.7;
+            /* color: #7330fa; */
+        }
+
+        .filter:hover {
+            opacity: 1;
+            cursor: pointer;
+        }
+
+        .filter p {
+            font-size: 0.8rem;
+        }
+
+        .tax-info {
+            display: none;
+            color: #898689;
+        }
+
+        .tax-toggle {
+            border: 1px solid #b9b9b9;
+            border-radius: 1rem;
+            height: 3.5rem;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+        }
+
+        #scroll-left,
+        #scroll-right {
+            background-color: #fff;
+            border: none;
+            padding: 10px 15px;
+            cursor: pointer;
+            font-size: 16px;
+            border-radius: 50%;
+            border: 1px solid #b9b9b9
+        }
+
+        #scroll-left,
+        #scroll-right i {
+            color: #8d8a8a
+        }
+
+        .custom-bg {
+            backdrop-filter: blur(10px);
+            background-color: rgba(255, 255, 255, 0.271);
+            color: #000;
+        }
+
+        .tax-toggle {
+            width: 16rem;
+        }
+
+        #scroll-left:hover,
+        #scroll-right:hover,
+        .tax-toggle:hover {
+            box-shadow: 1px 1px 5px rgb(216, 214, 214);
+        }
+
+        .indexListingImg {
+            height: 18rem;
+            object-fit: cover;
+            border-radius: 1rem;
+        }
+    </style>
+
+    <div id="filters-container" class="">
+        <button id="scroll-left" onclick="scrollLeftCustom()"><i class="fa-solid fa-arrow-left"></i></button>
+        <div id="filters">
+            <div class="filter active" data-filter="all">
+                <div><i class="fa-solid fa-globe"></i></div>
+                <p>All</p>
+            </div>
+            <div class="filter" data-filter="1">
+                <div><i class="fa-solid fa-bed"></i></div>
+                <p>Rooms</p>
+            </div>
+            <div class="filter" data-filter="2">
+                <div><i class="fa-solid fa-mountain-city"></i></div>
+                <p>Iconic Cities</p>
+            </div>
+            <div class="filter" data-filter="3">
+                <div><i class="fa-solid fa-mountain"></i></div>
+                <p>Mountains</p>
+            </div>
+            <div class="filter" data-filter="4">
+                <div><i class="fa-solid fa-umbrella-beach"></i></div>
+                <p>Beaches</p>
+            </div>
+            <div class="filter" data-filter="5">
+                <div><i class="fa-solid fa-person-swimming"></i></div>
+                <p>Pool</p>
+            </div>
+            <div class="filter" data-filter="6">
+                <div><i class="fa-solid fa-campground"></i></div>
+                <p>Camping</p>
+            </div>
+            <div class="filter" data-filter="7">
+                <div><i class="fa-solid fa-hotel"></i></div>
+                <p>Resort</p>
+            </div>
+            <div class="filter" data-filter="8">
+                <div><i class="fa-solid fa-snowflake"></i></div>
+                <p>Arctic</p>
+            </div>
+            <div class="filter" data-filter="9">
+                <div><i class="fa-solid fa-rocket"></i></div>
+                <p>OMG</p>
+            </div>
+            <div class="filter" data-filter="10">
+                <div><i class="fa-solid fa-tree"></i></div>
+                <p>Tree house</p>
+            </div>
+            <div class="filter" data-filter="11">
+                <div><i class="fa-solid fa-ship"></i></div>
+                <p>Boats</p>
+            </div>
+        </div>
+        <button id="scroll-right" onclick="scrollRightCustom()"><i class="fa-solid fa-arrow-right"></i></button>
+    </div>
+
+    <div class="tax-toggle ms-2 ">
+        <div class="form-check-reverse form-switch">
+            <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault">
+            <label class="form-check-label" for="flexSwitchCheckDefault">Display total after Taxes</label>
+        </div>
+    </div>
+    <div class="row mt-3">
+        <% for(let listing of alllistings){ %>
+            <a href="/listings/<%= listing._id %>" class="listing-link col-lg-3 col-md-4 col-sm-6"
+                data-category="<%= listing.category %>">
+                <div class="card custom-bg listing-card">
+                    <img src="<%= listing.image.url %>" class="card-img-top img-fluid indexListingImg"
+                        alt="<%= listing.title %> image">
+                    <div class="card-img-overlay"></div>
+                    <div class="card-body">
+                        <p class="card-text">
+                            <span style="font-weight: 500;">
+                                <%= listing.title %>
+                            </span>
+
+                            <br>
+                            <span class="price-info" style="font-weight: 200;">
+                                &#8377;<%= listing.price.toLocaleString("en-IN") %> / night
+                            </span>
+                            <span class="tax-info" style="display: none;"> <!-- Initial display is set to none -->
+                                &nbsp;
+                                <i class="rs-sign"><b> &#8377;<%= (listing.price * 1.18).toLocaleString("en-IN") %></b>
+                                    &nbsp; +18% total after taxes
+                                </i>
+                            </span>
+                        </p>
+                    </div>
+                </div>
+            </a>
+            <% } %>
+    </div>
+
+    <script>
+        let taxSwitch = document.getElementById("flexSwitchCheckDefault");
+        taxSwitch.addEventListener("click", () => {
+            let taxInfo = document.getElementsByClassName("tax-info");
+            for (info of taxInfo) {
+                if (info.style.display != "inline") {
+                    info.style.display = "inline";
+                } else {
+                    info.style.display = "none";
+                }
+            }
+        });
+        function scrollLeftCustom() {
+            console.log("Scrolling left");
+            document.getElementById('filters').scrollBy({
+                left: -200,
+                behavior: 'smooth'
+            });
+        }
+
+        function scrollRightCustom() {
+            console.log("Scrolling right");
+            document.getElementById('filters').scrollBy({
+                left: 200,
+                behavior: 'smooth'
+            });
+        }
+        document.addEventListener('DOMContentLoaded', () => {
+            const filters = document.querySelectorAll('.filter');
+            filters.forEach(filter => {
+                filter.addEventListener('click', () => {
+                    const filterCategory = filter.getAttribute('data-filter');
+                    console.log(`Filter selected: ${filterCategory}`); // Debugging line
+                    const listings = document.querySelectorAll('.listing-link');
+
+                    listings.forEach(listing => {
+                        const listingCategory = listing.getAttribute('data-category');
+                        console.log(`Listing category: ${listingCategory}`); // Debugging line
+                        if (filterCategory === 'all' || listingCategory === filterCategory) {
+                            listing.style.display = 'block';
+                        } else {
+                            listing.style.display = 'none';
+                        }
+                    });
+                });
+            });
+        });
+    </script>

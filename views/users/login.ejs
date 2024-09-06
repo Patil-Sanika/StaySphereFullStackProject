@@ -1,0 +1,32 @@
+<% layout("/layouts/boilerplate") %>
+    <style>
+        .loginbtn {
+            background-color: rgb(136, 166, 241);
+
+            color: #fff;
+        }
+
+        .loginCard {
+            box-shadow: 1px 1px 5px rgb(206, 206, 206);
+        }
+    </style>
+    <div class="row mt-3">
+        <div class="col-6 offset-3  p-3 mb-5 bg-white rounded loginCard">
+            <h1 class="col-6 ">Login</h1>
+            <form action="/login" method="POST" novalidate class="needs-validation">
+                <div class="form-floating mb-3">
+                    <input type="text" name="username" class="form-control" id="username floatingInput"
+                        placeholder="Username" required>
+                    <label for="username floatingInput">Username</label>
+                    <div class="invalid-feedback">Enter username!</div>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" name="password" class="form-control" id="password floatingPassword"
+                        placeholder="Password" required>
+                    <label for="password floatingPassword">Password</label>
+                    <div class="invalid-feedback">Enter password!</div>
+                </div>
+                <button class="btn loginbtn">Login</button>
+            </form>
+        </div>
+    </div>
