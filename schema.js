@@ -1,5 +1,7 @@
+// Import Joi for schema validation
 const Joi = require('joi');
 
+// Define validation schema for listing
 module.exports.listingSchema = Joi.object({
     listing: Joi.object({
         title: Joi.string().required(),
@@ -9,9 +11,10 @@ module.exports.listingSchema = Joi.object({
         category: Joi.string().required(),
         price: Joi.number().required().min(0), // Changed to Joi.number()
         image: Joi.string().allow("", null),
-    }).required()
+    }).required()// The listing object itself is required
 });
 
+// Define validation schema for review
 module.exports.reviewSchema = Joi.object({
     review: Joi.object({
         rating: Joi.number().required().min(1).max(5),

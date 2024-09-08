@@ -1,5 +1,8 @@
+// Import mongoose for database interaction
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
+
+// Define the schema for a review
 const reviewSchema = new Schema({
     comment: {
         type: String,
@@ -21,4 +24,5 @@ const reviewSchema = new Schema({
     },
 });
 
+// Create the Review model from the schema and export it
 module.exports = mongoose.model("Review",reviewSchema);

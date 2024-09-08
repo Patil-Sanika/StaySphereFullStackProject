@@ -1,6 +1,7 @@
 const Listing = require("../models/listing");
 const Review = require("../models/review");
 
+// Controller to handle the creation of a new review for a listing
 module.exports.createReview = async (req, res) => {
     let listing = await Listing.findById(req.params.id);
     let newReview = new Review(req.body.review);
@@ -14,6 +15,7 @@ module.exports.createReview = async (req, res) => {
     res.redirect(`/listings/${listing._id}`);
 };
 
+// Controller to handle the deletion of a review from a listing
 module.exports.destroyReview = async(req,res)=>{
     let { id, reviewId } = req.params;
     await Listing.findByIdAndUpdate()

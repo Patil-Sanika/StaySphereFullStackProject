@@ -1,37 +1,30 @@
+// Import necessary models, utilities, and schemas
 const Listing = require("./models/listing");
 const Review = require("./models/review");
 const ExpressError = require("./utils/ExpressError.js");
 const { listingSchema,reviewSchema} = require("./schema.js");
 
+// Middleware to check if the user is logged in
 module.exports.isLoggedIn = (req, res, next)=>{
     console.log(req.user);
     if(!req.isAuthenticated()){
-        req.session.redirectUrl = req.originalUrl;
+        req.session.redirectUrl = req.originalUrl;// Save the original URL for redirecting after login
         req.flash("error","you must be logged in to create listing");
         return res.redirect("/login");
     }
-    next();
+    next();// Proceed to the next middleware if authenticated
 }
 
+// Middleware to save and clear the redirect URL from session
 module.exports.saveRedirectUrl = (req,res,next)=>{
     if(req.session.redirectUrl){
-        res.locals.redirectUrl =req.session.redirectUrl;
-        delete req.session.redirectUrl;  
+        res.locals.redirectUrl =req.session.redirectUrl;// Save redirect URL to locals
+        delete req.session.redirectUrl; // Clear redirect URL from session 
     }
-    next();
+    next();// Proceed to the next middleware
 };
 
-// module.exports.isOwner = async(req,res,next)=>{
-//     let { id } = req.params;
-//     let listing = await Listing.findById(id);
-//     if(!listing.owner.equals(res.locals.currUser._id)){
-//         req.flash("error","You are not the Owner fo this listing");
-//         return res.redirect(`/listings/${id}`);
-//     }
-//     next();
-// };
-
-
+// Middleware to check if the current user is the owner of the listing
 module.exports.isOwner = async (req, res, next) => {
     const { id } = req.params;
     const listing = await Listing.findById(id);
@@ -47,19 +40,23 @@ module.exports.isOwner = async (req, res, next) => {
         return res.redirect(`/listings/${id}`);
     }
     
-    next();
+    next();// Proceed to the next middleware if the user is the owner
 };
 
+
+// Middleware to validate the listing data using Joi schema
 module.exports.validateListing = (req, res, next) => {
     let { error } = listingSchema.validate(req.body);
     if (error) {
-        let errMsg = error.details.map((el) => el.message).join(",");
-        throw new ExpressError(400, errMsg);
+        let errMsg = error.details.map((el) => el.message).join(",");// Collect all error messages
+        throw new ExpressError(400, errMsg);// Throw an error if validation fails
     } else {
         next();
     }
 };
 
+
+// Middleware to validate the review data using Joi schema
 module.exports.validateReview = (req, res, next) => {
     let { error } = reviewSchema.validate(req.body);
     if (error) {
@@ -70,6 +67,8 @@ module.exports.validateReview = (req, res, next) => {
     }
 };
 
+
+// Middleware to check if the current user is the author of the review
 module.exports.isReviewAuthor = async(req,res,next)=>{
     let {id, reviewId } = req.params;
     let review = await Review.findById(reviewId);
