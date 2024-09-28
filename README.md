@@ -6,11 +6,13 @@ StaySphere is a full-featured travel listing and review application, similar to 
 ## Table of Contents
 
 - [Features](#features)
+- [Images](#images)
 - [Installation](#installation)
 - [Usage](#usage)
 - [Folder Structure](#folder-structure)
 - [Contributing](#contributing)
 - [License](#license)
+- [Feedback](#feedback)
 
 ## Features
 
@@ -134,7 +136,6 @@ StaySphere/
 ├── package.json # Project metadata and          dependencies 
 ├── README.md # Project documentation
 └── schema.js
-```
 
 ## Contributing
 
