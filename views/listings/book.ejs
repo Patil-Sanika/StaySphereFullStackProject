@@ -1,0 +1,54 @@
+<% layout("/layouts/boilerplate") %>
+
+    <div class="row">
+        <div class="col-8 offset-2">
+            <br><br>
+            <h3>Book Your Favorite Place</h3>
+            <form id="booking-form" method="POST" novalidate class="needs-validation" action="/listings"
+                enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="full-name" class="form-label">Full Name</label>
+                    <input placeholder="Enter Full Name" type="text" class="form-control" id="full-name" name="fullName"
+                        required>
+                    <div class="invalid-feedback">Enter valid Name</div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-4">
+                        <label for="guests" class="form-label">Number of Guests</label>
+                        <input placeholder="Enter Number of Guests" type="number" min="1" class="form-control"
+                            id="guests" name="guests" required>
+                        <div class="invalid-feedback">Enter Number of Guests</div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="checkin-date" class="form-label">Check In</label>
+                        <input placeholder="Enter date" type="date" class="form-control" id="checkin-date"
+                            name="checkinDate" required>
+                        <div class="invalid-feedback">Enter valid date</div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="checkout-date" class="form-label">Check Out</label>
+                        <input placeholder="Enter date" type="date" class="form-control" id="checkout-date"
+                            name="checkoutDate" required>
+                        <div class="invalid-feedback">Enter valid date</div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="mb-3 col-md-8">
+                        <label for="email" class="form-label">Email</label>
+                        <input placeholder="Enter email" type="email" class="form-control" id="email" name="email"
+                            required>
+                        <div class="invalid-feedback">Enter valid Email</div>
+                    </div>
+                    <div class="mb-3 col-md-4">
+                        <label for="phone" class="form-label">Mobile no</label>
+                        <input placeholder="888 888 8888" type="tel" id="phone" name="phone" min="10" max="10"
+                            pattern="[0-9]{10}" title="Ten digits code" class="form-control" required>
+                        <div class="invalid-feedback">Enter valid mobile no</div>
+                    </div>
+                </div>
+                <input type="hidden" name="listingId" value="<%= listing._id %>">
+                <!-- Add this hidden input for listing ID -->
+                <button type="submit" class="btn btn-dark add-btn">Book</button>
+            </form>
+        </div>
+    </div>

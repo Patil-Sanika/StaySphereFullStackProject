@@ -18,6 +18,9 @@ const flash = require("connect-flash");
 const passport = require("passport");
 const LocalStrategy = require("passport-local");
 
+const bodyParser = require('body-parser');
+const bookingRoutes = require('./routes/booking');
+
 const User = require("./models/users.js");
 
 // Import route handlers
@@ -78,6 +81,13 @@ const sessionOptions = {
         httpOnly: true,
     }
 };
+
+// Set Booking 
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
+
+app.use('/api', bookingRoutes);
+
 
 // Set up session and flash middleware
 app.use(session(sessionOptions));

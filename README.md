@@ -1,5 +1,5 @@
 # StaySphereFullStackProject
-# Wanderlust
+# StaySphere
 
 StaySphere is a full-featured travel listing and review application, similar to Airbnb. Users can create, read, update, and delete listings, as well as add reviews to these listings. 
 
@@ -39,7 +39,7 @@ StaySphere is a full-featured travel listing and review application, similar to 
 
     ```sh
     git clone https://github.com/Patil-Sanika/FullStackProject
-    cd wanderlust
+    cd StaySphere
     ```
 
 2. **Install dependencies:**
@@ -87,7 +87,7 @@ StaySphere is a full-featured travel listing and review application, similar to 
     Navigate to a listing and add a review with a rating and comment.
 
 ## Folder Structure
-
+```plaintext
 StaySphere/ 
 ├── controller/ # Route controllers 
 │   ├── listings.js 
@@ -102,7 +102,7 @@ StaySphere/
 |   |   ├── rating.css
 |   |   └──style.css
 │   └── js/ 
-        └──script.js
+|        └──script.js
 ├── routes/ # Express route handlers 
 │   ├── listing.js 
 │   ├── review.js 
@@ -134,6 +134,7 @@ StaySphere/
 ├── package.json # Project metadata and          dependencies 
 ├── README.md # Project documentation
 └── schema.js
+```
 
 ## Contributing
 
